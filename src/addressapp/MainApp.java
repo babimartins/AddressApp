@@ -6,6 +6,7 @@ import addressapp.controller.PersonEditDialogController;
 import addressapp.controller.PersonOverviewController;
 import addressapp.controller.RootLayoutController;
 import addressapp.util.Files;
+import addressapp.util.FilesPath;
 import java.io.File;
 import java.io.IOException;
 import javafx.application.Application;
@@ -90,7 +91,7 @@ public class MainApp extends Application {
         }
 
         // Tenta carregar o último arquivo de pessoa aberto.
-        File file = Files.getPersonFilePath();
+        File file = FilesPath.getPersonFilePath();
         if (file != null) {
             Files.loadPersonDataFromFile(file);
         }

@@ -9,6 +9,7 @@ import javafx.stage.FileChooser;
 import org.controlsfx.dialog.Dialogs;
 import addressapp.MainApp;
 import addressapp.util.Files;
+import addressapp.util.FilesPath;
 
 /**
  * FXML Controller class
@@ -43,7 +44,7 @@ public class RootLayoutController implements Initializable {
     @FXML
     private void handleNew() {
         mainApp.getPersonData().clear();
-        Files.setPersonFilePath(null);
+        FilesPath.setPersonFilePath(null);
     }
 
     /**
@@ -72,7 +73,7 @@ public class RootLayoutController implements Initializable {
      */
     @FXML
     private void handleSave() {
-        File personFile = Files.getPersonFilePath();
+        File personFile = FilesPath.getPersonFilePath();
         if (personFile != null) {
             Files.savePersonDataToFile(personFile);
         } else {
