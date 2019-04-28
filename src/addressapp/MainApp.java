@@ -1,7 +1,6 @@
 package addressapp;
 
 import addressapp.model.Person;
-import addressapp.model.PersonListWrapper;
 import addressapp.controller.BirthdayStatisticsController;
 import addressapp.controller.PersonEditDialogController;
 import addressapp.controller.PersonOverviewController;
@@ -9,7 +8,6 @@ import addressapp.controller.RootLayoutController;
 import addressapp.util.FilesHelper;
 import java.io.File;
 import java.io.IOException;
-import java.util.prefs.Preferences;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,10 +18,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  *
