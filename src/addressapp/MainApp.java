@@ -6,7 +6,7 @@ import addressapp.controller.BirthdayStatisticsController;
 import addressapp.controller.PersonEditDialogController;
 import addressapp.controller.PersonOverviewController;
 import addressapp.controller.RootLayoutController;
-import addressapp.util.Files;
+import addressapp.util.FilesHelper;
 import java.io.File;
 import java.io.IOException;
 import java.util.prefs.Preferences;
@@ -96,9 +96,9 @@ public class MainApp extends Application {
         }
 
         // Tenta carregar o último arquivo de pessoa aberto.
-        File file = Files.getPersonFilePath();
+        File file = FilesHelper.getPersonFilePath();
         if (file != null) {
-            Files.loadPersonDataFromFile(file);
+            FilesHelper.loadPersonDataFromFile(file);
         }
     }
     

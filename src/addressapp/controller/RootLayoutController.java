@@ -8,7 +8,7 @@ import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
 import org.controlsfx.dialog.Dialogs;
 import addressapp.MainApp;
-import addressapp.util.Files;
+import addressapp.util.FilesHelper;
 
 /**
  * FXML Controller class
@@ -43,7 +43,7 @@ public class RootLayoutController implements Initializable {
     @FXML
     private void handleNew() {
         mainApp.getPersonData().clear();
-        Files.setPersonFilePath(null);
+        FilesHelper.setPersonFilePath(null);
     }
 
     /**
@@ -62,7 +62,7 @@ public class RootLayoutController implements Initializable {
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
         if (file != null) {
-            Files.loadPersonDataFromFile(file);
+            FilesHelper.loadPersonDataFromFile(file);
         }
     }
 
@@ -72,9 +72,9 @@ public class RootLayoutController implements Initializable {
      */
     @FXML
     private void handleSave() {
-        File personFile = Files.getPersonFilePath();
+        File personFile = FilesHelper.getPersonFilePath();
         if (personFile != null) {
-            Files.savePersonDataToFile(personFile);
+            FilesHelper.savePersonDataToFile(personFile);
         } else {
             handleSaveAs();
         }
@@ -100,7 +100,7 @@ public class RootLayoutController implements Initializable {
             if (!file.getPath().endsWith(".xml")) {
                 file = new File(file.getPath() + ".xml");
             }
-            Files.savePersonDataToFile(file);
+            FilesHelper.savePersonDataToFile(file);
         }
     }
 

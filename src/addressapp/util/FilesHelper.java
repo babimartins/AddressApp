@@ -17,7 +17,7 @@ import org.controlsfx.dialog.Dialogs;
  *
  * @author Babi
  */
-public class Files {
+public class FilesHelper {
     
     /**
      * Os dados como uma observable list de Persons.
