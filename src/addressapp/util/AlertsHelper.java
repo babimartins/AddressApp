@@ -20,7 +20,7 @@ public class AlertsHelper {
         AlertsHelper.alert = alert;
     }
     
-    public static Alert creatAlert(String title, String header, String content, AlertType type){
+    public static Alert createAlert(String title, String header, String content, AlertType type){
         alert = new Alert(type);
         alert.setTitle(title);
         alert.setHeaderText(header);

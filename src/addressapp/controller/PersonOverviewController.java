@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import addressapp.MainApp;
 import addressapp.model.Person;
+import addressapp.util.AlertsHelper;
 import addressapp.util.DateUtil;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -118,12 +119,9 @@ public class PersonOverviewController {
         } else {
             // Nada selecionado.
 
-        Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Nenhuma seleção");
-                alert.setHeaderText("Nenhuma Pessoa Selecionada");
-                alert.setContentText("Por favor, selecione uma pessoa na tabela.");
-
-                alert.showAndWait();
+        Alert alert = AlertsHelper.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
+                "Por favor, selecione uma pessoa na tabela.", AlertType.WARNING);
+            alert.showAndWait();
         }
     }
     
@@ -155,10 +153,8 @@ public class PersonOverviewController {
 
         } else {
             // Nada seleciondo.
-            Alert alert = new Alert(AlertType.WARNING);
-                alert.setTitle("Nenhuma seleção");
-                alert.setHeaderText("Nenhuma Pessoa Selecionada");
-                alert.setContentText("Por favor, selecione uma pessoa na tabela.");
+            Alert alert = AlertsHelper.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
+                    "Por favor, selecione uma pessoa na tabela.", AlertType.WARNING);
                 alert.showAndWait();
         }
     }
