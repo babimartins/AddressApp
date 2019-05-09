@@ -18,21 +18,15 @@ import javafx.scene.control.Alert.AlertType;
  */
 public class PersonOverviewController {
 
-    /**
-     * Initializes the controller class.
-     */
     @FXML
     private void initialize() {
-        // Inicializa a tabela de pessoas com duas colunas.
         firstNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().lastNameProperty());
 
-        // Limpa os detalhes da pessoa.
         showPersonDetails(null);
 
-        // Detecta mudanças de seleção e mostra os detalhes da pessoa quando houver mudança.
         personTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
     } 
@@ -57,13 +51,8 @@ public class PersonOverviewController {
     @FXML
     private Label birthdayLabel;
 
-    // Reference to the main application.
     private MainApp mainApp;
 
-    /**
-     * O construtor.
-     * O construtor é chamado antes do método inicialize().
-     */
     public PersonOverviewController() {
     }
 
@@ -79,15 +68,8 @@ public class PersonOverviewController {
         personTable.setItems(mainApp.getPersonData());
     }
     
-    /**
-    * PReenche todos os campos de texto para mostrar detalhes sobre a pessoa.
-    * Se a pessoa especificada for null, todos os campos de texto são limpos.
-    * 
-    * @param person a pessoa ou null
-    */
     private void showPersonDetails(Person person) {
         if (person != null) {
-            // Preenche as labels com informações do objeto person.
             firstNameLabel.setText(person.getFirstName());
             lastNameLabel.setText(person.getLastName());
             streetLabel.setText(person.getStreet());
@@ -95,7 +77,6 @@ public class PersonOverviewController {
             cityLabel.setText(person.getCity());
             birthdayLabel.setText(DateUtil.format(person.getBirthday()));
         } else {
-            // Person é null, remove todo o texto.
             firstNameLabel.setText("");
             lastNameLabel.setText("");
             streetLabel.setText("");
@@ -105,27 +86,18 @@ public class PersonOverviewController {
         }
     }
 
-    /**
-    * Chamado quando o usuário clica no botão delete.
-    */
     @FXML
     private void handleDeletePerson() {
         int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
         } else {
-            // Nada selecionado.
-
-        Alert alert = AlertsHelper.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
+            Alert alert = AlertsHelper.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
                 "Por favor, selecione uma pessoa na tabela.", AlertType.WARNING);
             alert.showAndWait();
         }
     }
     
-    /**
-    * Chamado quando o usuário clica no botão novo. Abre uma janela para editar
-    * detalhes da nova pessoa.
-    */
     @FXML
     private void handleNewPerson() {
         Person tempPerson = new Person();
@@ -135,10 +107,6 @@ public class PersonOverviewController {
         }
     }
 
-    /**
-     * Chamado quando o usuário clica no botão edit. Abre a janela para editar
-     * detalhes da pessoa selecionada.
-     */
     @FXML
     private void handleEditPerson() {
         Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
@@ -149,7 +117,6 @@ public class PersonOverviewController {
             }
 
         } else {
-            // Nada seleciondo.
             Alert alert = AlertsHelper.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
                     "Por favor, selecione uma pessoa na tabela.", AlertType.WARNING);
                 alert.showAndWait();

@@ -23,24 +23,14 @@ public class Person {
     private final StringProperty city;
     private final ObjectProperty<LocalDate> birthday;
 
-    /**
-     *  Construtor padrão.
-     */
     public Person() {
         this(null, null);
     }
     
-    /**
-     * Construtor com alguns dados iniciais.
-     * 
-     * @param firstName Primeiro nome da Pessoa.
-     * @param lastName Sobrenome da Pessoa.
-     */
     public Person(String firstName, String lastName) {
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         
-        // Alguns dados de exemplo, apenas para testes.
         this.street = new SimpleStringProperty("some street");
         this.postalCode = new SimpleIntegerProperty(1234);
         this.city = new SimpleStringProperty("some city");

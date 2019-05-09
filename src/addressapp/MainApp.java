@@ -28,13 +28,10 @@ public class MainApp extends Application {
     
     private Stage primaryStage;
     private BorderPane rootLayout;
-    /**
-     * Os dados como uma observable list de Persons.
-     */
+
     private ObservableList<Person> personData = FXCollections.observableArrayList();
     
     public MainApp() {
-        // OK
         personData.add(new Person("Hans", "Muster"));
         personData.add(new Person("Ruth", "Mueller"));
         personData.add(new Person("Heinz", "Kurz"));
@@ -46,10 +43,6 @@ public class MainApp extends Application {
         personData.add(new Person("Martin", "Mueller"));
     }
     
-    /**
-     * Retorna os dados como uma observable list de Persons. 
-     * @return
-     */
     public ObservableList<Person> getPersonData() {
         return personData;
     }
@@ -66,22 +59,16 @@ public class MainApp extends Application {
         showPersonOverview();
     }
     
-    /**
-     * Inicializa o root layout (layout base).
-     */
     public void initRootLayout() {
         try {
-            // Carrega o root layout do arquivo fxml.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class
                     .getResource("view/RootLayout.fxml"));
             rootLayout = (BorderPane) loader.load();
 
-            // Mostra a scene (cena) contendo o root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
 
-            // Dá ao controller o acesso ao main app.
             RootLayoutController controller = loader.getController();
             controller.setMainApp(this);
 
@@ -90,35 +77,24 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
 
-        // Tenta carregar o último arquivo de pessoa aberto.
         File file = FilesPath.getPersonFilePath();
         if (file != null) {
             Files.loadPersonDataFromFile(file);
         }
     }
     
-    /**
-     * Retorna o palco principal.
-     * @return
-     */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
     
-    /**
-    * Mostra a person overview dentro do root layout.
-    */
     public void showPersonOverview() {
         try {
-            // Carrega a person overview.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
-            // Define a person overview no centro do root layout.
             rootLayout.setCenter(personOverview);
 
-            // Dá ao controlador acesso à the main app.
             PersonOverviewController controller = loader.getController();
             controller.setMainApp(this);
 
@@ -131,21 +107,12 @@ public class MainApp extends Application {
         launch(args);
     }
     
-    /**
-    * Abre uma janela para editar detalhes para a pessoa especificada. Se o usuário clicar
-    * OK, as mudanças são salvasno objeto pessoa fornecido e retorna true.
-    * 
-    * @param person O objeto pessoa a ser editado
-    * @return true Se o usuário clicou OK,  caso contrário false.
-    */
     public boolean showPersonEditDialog(Person person) {
         try {
-            // Carrega o arquivo fxml e cria um novo stage para a janela popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/PersonEditDialog.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 
-            // Cria o palco dialogStage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Edit Person");
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -153,12 +120,10 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Define a pessoa no controller.
             PersonEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setPerson(person);
 
-            // Mostra a janela e espera até o usuário fechar.
             dialogStage.showAndWait();
 
             return controller.isOkClicked();
@@ -168,12 +133,8 @@ public class MainApp extends Application {
         }
     }
     
-    /**
-     * Abre uma janela para mostrar as estatísticas de aniversário.
-     */
     public void showBirthdayStatistics() {
         try {
-            // Carrega o arquivo fxml e cria um novo palco para o popup.
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("view/BirthdayStatistics.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
@@ -184,7 +145,6 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Define a pessoa dentro do controller.
             BirthdayStatisticsController controller = loader.getController();
             controller.setPersonData(personData);
 

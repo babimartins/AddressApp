@@ -27,28 +27,15 @@ public class BirthdayStatisticsController {
 
     private ObservableList<String> monthNames = FXCollections.observableArrayList();
 
-    /**
-     * Inicializa a classe controller. Este método é chamado automaticamente
-     * após o arquivo fxml ter sido carregado.
-     */
     @FXML
     private void initialize() {
-        // Obtém an array com nomes dos meses em Inglês.
         String[] months = DateFormatSymbols.getInstance(Locale.ENGLISH).getMonths();
-        // Converte o array em uma lista e adiciona em nossa ObservableList de meses.
         monthNames.addAll(Arrays.asList(months));
         
-        // Associa os nomes de mês como categorias para o eixo horizontal.
         xAxis.setCategories(monthNames);
     }
 
-    /**
-     * Sets the persons to show the statistics for.
-     * 
-     * @param persons
-     */
     public void setPersonData(List<Person> persons) {
-        // Conta o número de pessoas tendo seus aniversários em um mês específico.
         int[] monthCounter = new int[12];
         for (Person p : persons) {
             int month = p.getBirthday().getMonthValue() - 1;
@@ -57,7 +44,6 @@ public class BirthdayStatisticsController {
 
         XYChart.Series<String, Integer> series = new XYChart.Series<>();
         
-        // Cria um objeto XYChart.Data para cada mês. Adiciona ele às séries.
         for (int i = 0; i < monthCounter.length; i++) {
             series.getData().add(new XYChart.Data<>(monthNames.get(i), monthCounter[i]));
         }

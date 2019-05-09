@@ -34,28 +34,14 @@ public class PersonEditDialogController {
     private Person person;
     private boolean okClicked = false;
 
-    /**
-     * Inicializa a classe controlle. Este método é chamado automaticamente
-     * após o arquivo fxml ter sido carregado.
-     */
     @FXML
     private void initialize() {
     }
 
-    /**
-     * Define o palco deste dialog.
-     * 
-     * @param dialogStage
-     */
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
     }
 
-    /**
-     * Define a pessoa a ser editada no dialog.
-     * 
-     * @param person
-     */
     public void setPerson(Person person) {
         this.person = person;
 
@@ -68,18 +54,10 @@ public class PersonEditDialogController {
         birthdayField.setPromptText("dd.mm.yyyy");
     }
 
-    /**
-     * Retorna true se o usuário clicar OK,caso contrário false.
-     * 
-     * @return
-     */
     public boolean isOkClicked() {
         return okClicked;
     }
 
-    /**
-     * Chamado quando o usuário clica OK.
-     */
     @FXML
     private void handleOk() {
         if (isInputValid()) {
@@ -95,36 +73,23 @@ public class PersonEditDialogController {
         }
     }
 
-    /**
-     * Chamado quando o usuário clica Cancel.
-     */
     @FXML
     private void handleCancel() {
         dialogStage.close();
     }
 
-    /**
-     * Valida a entrada do usuário nos campos de texto.
-     * 
-     * @return true se a entrada é válida
-     */
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (firstNameField.getText() == null || firstNameField.getText().length() == 0) {
+        if (firstNameField.getText() == null || firstNameField.getText().length() == 0) 
             errorMessage += "Nome inválido!\n"; 
-        }
-        if (lastNameField.getText() == null || lastNameField.getText().length() == 0) {
+        if (lastNameField.getText() == null || lastNameField.getText().length() == 0) 
             errorMessage += "Sobrenome inválido!\n"; 
-        }
-        if (streetField.getText() == null || streetField.getText().length() == 0) {
+        if (streetField.getText() == null || streetField.getText().length() == 0) 
             errorMessage += "Rua inválida!\n"; 
-        }
-
-        if (postalCodeField.getText() == null || postalCodeField.getText().length() == 0) {
+        if (postalCodeField.getText() == null || postalCodeField.getText().length() == 0) 
             errorMessage += "Código Postal inválido!\n"; 
-        } else {
-            // tenta converter o código postal em um int.
+        else {
             try {
                 Integer.parseInt(postalCodeField.getText());
             } catch (NumberFormatException e) {
@@ -132,27 +97,22 @@ public class PersonEditDialogController {
             }
         }
 
-        if (cityField.getText() == null || cityField.getText().length() == 0) {
+        if (cityField.getText() == null || cityField.getText().length() == 0) 
             errorMessage += "Cidade inválida!\n"; 
-        }
 
-        if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
+        if (birthdayField.getText() == null || birthdayField.getText().length() == 0) 
             errorMessage += "Aniversário inválido!\n";
-        } else {
-            if (!DateUtil.validDate(birthdayField.getText())) {
+        else 
+            if (!DateUtil.validDate(birthdayField.getText())) 
                 errorMessage += "Aniversário inválido. Use o formato dd.mm.yyyy!\n";
-            }
-        }
 
-        if (errorMessage.length() == 0) {
+        if (errorMessage.length() == 0) 
             return true;
-        } else {
-            // Mostra a mensagem de erro.
+        else {
             Alert alert = AlertsHelper.createAlert("Campos Inválidos", 
                     "Por favor, corrija os campos inválidos", 
                     errorMessage, AlertType.ERROR);
                 alert.showAndWait();
-                
             return false;
         }
     }
