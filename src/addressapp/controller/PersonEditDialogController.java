@@ -35,8 +35,7 @@ public class PersonEditDialogController {
     private boolean okClicked = false;
 
     @FXML
-    private void initialize() {
-    }
+    private void initialize() {   }
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;

@@ -8,6 +8,7 @@ import addressapp.MainApp;
 import addressapp.model.Person;
 import addressapp.util.AlertsHelper;
 import addressapp.util.DateUtil;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
@@ -64,8 +65,11 @@ public class PersonOverviewController {
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
 
-        // Adiciona os dados da observable list na tabela
-        personTable.setItems(mainApp.getPersonData());
+        setMainAppItens(mainApp.getPersonData());
+    }
+    
+    private void setMainAppItens(ObservableList<Person> personData){
+        personTable.setItems(personData);
     }
     
     private void showPersonDetails(Person person) {
