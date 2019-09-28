@@ -8,9 +8,13 @@ import addressapp.MainApp;
 import addressapp.model.Person;
 import addressapp.util.AlertsHelper;
 import addressapp.util.DateUtil;
+import java.io.IOException;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -52,7 +56,7 @@ public class PersonOverviewController {
     @FXML
     private Label birthdayLabel;
 
-    private MainApp mainApp;
+    private static MainApp mainApp;
 
     public PersonOverviewController() {
     }
@@ -105,7 +109,7 @@ public class PersonOverviewController {
     @FXML
     private void handleNewPerson() {
         Person tempPerson = new Person();
-        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+        boolean okClicked = PersonEditDialogController.showPersonEditDialog(tempPerson);
         if (okClicked) {
             mainApp.getPersonData().add(tempPerson);
         }
@@ -115,7 +119,7 @@ public class PersonOverviewController {
     private void handleEditPerson() {
         Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
         if (selectedPerson != null) {
-            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+            boolean okClicked = PersonEditDialogController.showPersonEditDialog(selectedPerson);
             if (okClicked) {
                 showPersonDetails(selectedPerson);
             }
@@ -124,6 +128,25 @@ public class PersonOverviewController {
             Alert alert = AlertsHelper.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
                     "Por favor, selecione uma pessoa na tabela.", AlertType.WARNING);
                 alert.showAndWait();
+        }
+    }
+      
+    
+    public static void showPersonOverview() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/PersonOverview.fxml"));
+            AnchorPane personOverview = (AnchorPane) loader.load();
+
+            BorderPane auxRootLayout = MainApp.getRootLayout();
+            auxRootLayout.setCenter(personOverview);
+            MainApp.setRootLayout(auxRootLayout);
+
+            PersonOverviewController controller = loader.getController();
+            controller.setMainApp(mainApp);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
         

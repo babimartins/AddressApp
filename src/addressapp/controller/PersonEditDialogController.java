@@ -1,5 +1,6 @@
 package addressapp.controller;
 
+import addressapp.MainApp;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
@@ -7,7 +8,12 @@ import javafx.scene.control.Alert.AlertType;
 import addressapp.model.Person;
 import addressapp.util.AlertsHelper;
 import addressapp.util.DateUtil;
+import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 
 /**
  * FXML Controller class
@@ -112,6 +118,32 @@ public class PersonEditDialogController {
                     "Por favor, corrija os campos inválidos", 
                     errorMessage, AlertType.ERROR);
                 alert.showAndWait();
+            return false;
+        }
+    }
+    
+    public static boolean showPersonEditDialog(Person person) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("view/PersonEditDialog.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Person");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(MainApp.getPrimaryStage());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            PersonEditDialogController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setPerson(person);
+
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
     }

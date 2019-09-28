@@ -10,6 +10,11 @@ import org.controlsfx.dialog.Dialogs;
 import addressapp.MainApp;
 import addressapp.util.Files;
 import addressapp.util.FilesPath;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -20,7 +25,7 @@ public class RootLayoutController implements Initializable {
 
     public void initialize(URL url, ResourceBundle rb) { }    
     
-    private MainApp mainApp;
+    private static MainApp mainApp;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -86,7 +91,31 @@ public class RootLayoutController implements Initializable {
     
     @FXML
     private void handleShowBirthdayStatistics() {
-        mainApp.showBirthdayStatistics();
+        BirthdayStatisticsController.showBirthdayStatistics();
+    }
+       
+    public static void initRootLayout() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class
+                    .getResource("view/RootLayout.fxml"));
+            MainApp.setRootLayout((BorderPane) loader.load());
+
+            Scene scene = new Scene(MainApp.getRootLayout());
+            Stage auxPrimaryStage = MainApp.getPrimaryStage();
+            auxPrimaryStage.setScene(scene);
+            MainApp.setPrimaryStage(auxPrimaryStage);
+
+            RootLayoutController controller = loader.getController();
+            controller.setMainApp(mainApp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File file = FilesPath.getPersonFilePath();
+        if (file != null) {
+            Files.loadPersonDataFromFile(file);
+        }
     }
     
 }
