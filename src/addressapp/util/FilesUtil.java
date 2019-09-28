@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  *
  * @author Babi
  */
-public class FilesPath {
+public class FilesUtil {
     
     private static Stage primaryStage;
     

@@ -7,17 +7,17 @@ import javafx.scene.control.Alert.AlertType;
  *
  * @author Babi
  */
-public class AlertsHelper {
+public class AlertsUtil {
     
     private static Alert alert;
     
-    public AlertsHelper(){}
+    public AlertsUtil(){}
 
     public static Alert getAlert() {
         return alert;
     }
     public static void setAlert(Alert alert) {
-        AlertsHelper.alert = alert;
+        AlertsUtil.alert = alert;
     }
     
     public static Alert createAlert(String title, String header, String content, AlertType type){

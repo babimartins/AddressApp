@@ -29,7 +29,7 @@ public class Files {
             personData.clear();
             personData.addAll(wrapper.getPersons());
 
-            FilesPath.setPersonFilePath(file);
+            FilesUtil.setPersonFilePath(file);
         } catch (Exception e) { 
             Dialogs.create()
                     .title("Erro")
@@ -50,7 +50,7 @@ public class Files {
 
             m.marshal(wrapper, file);
 
-            FilesPath.setPersonFilePath(file);
+            FilesUtil.setPersonFilePath(file);
         } catch (Exception e) { 
             Dialogs.create().title("Erro")
                     .masthead("Não foi possível salvar os dados do arquivo:\n"

@@ -6,13 +6,14 @@ import javafx.fxml.Initializable;
 import java.io.File;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
-import org.controlsfx.dialog.Dialogs;
 import addressapp.MainApp;
+import addressapp.util.AlertsUtil;
 import addressapp.util.Files;
-import addressapp.util.FilesPath;
+import addressapp.util.FilesUtil;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
@@ -34,7 +35,7 @@ public class RootLayoutController implements Initializable {
     @FXML
     private void handleNew() {
         mainApp.getPersonData().clear();
-        FilesPath.setPersonFilePath(null);
+        FilesUtil.setPersonFilePath(null);
     }
 
     @FXML
@@ -52,7 +53,7 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     private void handleSave() {
-        File personFile = FilesPath.getPersonFilePath();
+        File personFile = FilesUtil.getPersonFilePath();
         if (personFile != null) 
             Files.savePersonDataToFile(personFile);
         else 
@@ -77,11 +78,8 @@ public class RootLayoutController implements Initializable {
 
     @FXML
     private void handleAbout() {
-        Dialogs.create()
-            .title("AddressApp")
-            .masthead("Sobre")
-            .message("Autor: Marco Jakob\nWebsite: http://code.makery.ch")
-            .showInformation();
+        AlertsUtil.createAlert("AddressApp", "Sobre", "Autor original: Marco Jakob"
+                + "\nWebsite: http://code.makery.ch\nAluna: Bárbara Martins", Alert.AlertType.INFORMATION).showAndWait();
     }
 
     @FXML
@@ -112,7 +110,7 @@ public class RootLayoutController implements Initializable {
             e.printStackTrace();
         }
 
-        File file = FilesPath.getPersonFilePath();
+        File file = FilesUtil.getPersonFilePath();
         if (file != null) {
             Files.loadPersonDataFromFile(file);
         }

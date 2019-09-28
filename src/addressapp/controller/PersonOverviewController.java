@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import addressapp.MainApp;
 import addressapp.model.Person;
-import addressapp.util.AlertsHelper;
+import addressapp.util.AlertsUtil;
 import addressapp.util.DateUtil;
 import java.io.IOException;
 import javafx.collections.ObservableList;
@@ -100,7 +100,7 @@ public class PersonOverviewController {
         if (selectedIndex >= 0) {
             personTable.getItems().remove(selectedIndex);
         } else {
-            Alert alert = AlertsHelper.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
+            Alert alert = AlertsUtil.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
                 "Por favor, selecione uma pessoa na tabela.", AlertType.WARNING);
             alert.showAndWait();
         }
@@ -125,7 +125,7 @@ public class PersonOverviewController {
             }
 
         } else {
-            Alert alert = AlertsHelper.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
+            Alert alert = AlertsUtil.createAlert("Nenhuma seleção", "Nenhuma Pessoa Selecionada", 
                     "Por favor, selecione uma pessoa na tabela.", AlertType.WARNING);
                 alert.showAndWait();
         }

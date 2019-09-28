@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import addressapp.model.Person;
-import addressapp.util.AlertsHelper;
+import addressapp.util.AlertsUtil;
 import addressapp.util.DateUtil;
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -114,7 +114,7 @@ public class PersonEditDialogController {
         if (errorMessage.length() == 0) 
             return true;
         else {
-            Alert alert = AlertsHelper.createAlert("Campos Inválidos", 
+            Alert alert = AlertsUtil.createAlert("Campos Inválidos", 
                     "Por favor, corrija os campos inválidos", 
                     errorMessage, AlertType.ERROR);
                 alert.showAndWait();
